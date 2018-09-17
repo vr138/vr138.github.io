@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="charset" content="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MI FB test</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<p>Response Status:</p>
+<pre id="responseStatus"></pre>
+<a href="./">Retest</a>
+
+
+<script>
+
+    var appId = window.location.hostname === "localhost" ? "161462764201028" : "2033459586898280";
+
+    window.fbAsyncInit = function () {
+
+        FB.init({
+            appId: appId,
+            autoLogAppEvents: true,
+            cookie: true,
+            status: true,
+            xfbml: true,
+            version: 'v3.0'
+        });
+
+        FB.getLoginStatus(function(r){
+
+            document.getElementById("responseStatus").innerText = JSON.stringify(r, null, 2);
+        });
+
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+</script>
+</body>
+</html>
